@@ -21,16 +21,16 @@
 </head>
 <body>
 
-<nav class="navbar navbar-light navbar-expand-md navigation-clean-button">
-    <div class="container"><a class="navbar-brand" href="#">RepAgency</a>
+<nav class="navbar navbar-dark bg-dark navbar-expand-md navigation-clean-button">
+    <div class="container"><a class="navbar-brand" href="#"><fmt:message key="msg.repair.agency"/></a>
         <button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span
                 class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse"
              id="navcol-1">
 
-                <span class="navbar-text actions"> <a href="${pageContext.request.contextPath}/app/login" class="login">  <fmt:message key="message.login"/></a>
+                <span class="navbar-text actions"> <a href="${pageContext.request.contextPath}/app/login" class="login"> <fmt:message key="message.login"/></a>
                     <a class="btn btn-light action-button" role="button" href="${pageContext.request.contextPath}/app/registration"
-                       style="background-color: #FF3C40;"> <fmt:message key="message.registration"/></a></a>
+                       style="background-color: #0062cc;"> <fmt:message key="message.registration"/></a></a>
                 </span>
                     <a class="btn" id="locales"
                        href="?sessionLocale=en"><img src="static/United-Kingdom-flag-icon.png" height="30px"/></a>
@@ -43,24 +43,37 @@
 </nav>
 
 
-<br/>
-
 <div data-bs-parallax-bg="true"
-     style="height: 500px;background-image: url(static/background.png);background-position: center;background-size: cover;"></div>
+     style="height: 500px;background-image: url(static/background.jpg);background-position: center;background-size: cover;"></div>
 
-<div class="footer-basic">
+<div class="footer-dark">
     <footer>
-        <div class="social"><a href="#"><i class="icon ion-social-instagram"></i></a><a href="#"><i
-                class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a
-                href="#"><i class="icon ion-social-facebook"></i></a></div>
-        <ul class="list-inline">
-            <li class="list-inline-item"><a href="#">Home</a></li>
-            <li class="list-inline-item"><a href="#">Services</a></li>
-            <li class="list-inline-item"><a href="#">About</a></li>
-            <li class="list-inline-item"><a href="#">Terms</a></li>
-            <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
-        </ul>
-        <p class="copyright">RepAgency © 2019</p>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6 col-md-3 item">
+                    <h3><a><fmt:message key="msg.services"/></a></h3>
+                    <ul>
+                        <li><a href="#"><fmt:message key="msg.web.design"/></a></li>
+                        <li><a href="#"><fmt:message key="msg.development"/></a></li>
+                        <li><a href="#"><fmt:message key="msg.hosting"/></a></li>
+                    </ul>
+                </div>
+                <div class="col-sm-6 col-md-3 item">
+                    <h3><a><fmt:message key="msg.about"/></a></h3>
+                    <ul>
+                        <li><a href="#"><fmt:message key="msg.company"/></a></li>
+                        <li><a href="#"><fmt:message key="msg.team"/></a></li>
+                        <li><a href="#"><fmt:message key="msg.careers"/></a></li>
+                    </ul>
+                </div>
+                <div class="col-md-6 item text">
+                    <h3><strong><a><fmt:message key="msg.repair.agency"/></a></strong><br></h3>
+                    <p><br><a><fmt:message key="msg.welcome.meaage"/></a><br><br></p>
+                </div>
+                <!--<div class="col item social"><a href="#"><i class="icon ion-social-facebook"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-instagram"></i></a></div>-->
+            </div>
+            <p class="copyright">Sadovskyi Maksym © 2019</p>
+        </div>
     </footer>
 </div>
 </body>
