@@ -23,9 +23,6 @@
    href="?sessionLocale=en"><img src="${pageContext.request.contextPath}/static/United-Kingdom-flag-icon.png" height="30px"/></a>
 <a class="btn"
    href="?sessionLocale=ua"><img src="${pageContext.request.contextPath}/static/Ukraine-Flag-icon.png" height="30px"/> </a>
-<%--        <h2>--%>
-<%--            This is registration form! <br/>--%>
-<%--        </h2>--%>
 <div class="login-form" align="center">
 
 
@@ -77,7 +74,7 @@
 <%--                </c:if>--%>
 <%--            </span>--%>
             <div class="form-group">
-                <button class="btn btn-primary login-btn btn-block" type="submit" value="Submit">
+                <button class="button" type="submit" value="Submit">
                     <fmt:message key="message.registration"/>
                 </button>
             </div>

@@ -10,7 +10,7 @@
 
 <h1>Welcome!!!</h1><br/>
 
-<a href="${pageContext.request.contextPath}/app/logout">На головну</a>
+<a href="${pageContext.request.contextPath}/app/login">Login</a>
 
 </body>
 </html>
