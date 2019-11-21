@@ -3,7 +3,7 @@ package ua.training.model.dao;
 import ua.training.model.dao.impl.JDBCDaoFactory;
 
 public abstract class DaoFactory {
-    private static DaoFactory daoFactory;
+    private static volatile DaoFactory daoFactory;
     public abstract UserDao createUserDao();
     public abstract RequestDao createRequestDao();
     public abstract CommentDao createCommentDao();

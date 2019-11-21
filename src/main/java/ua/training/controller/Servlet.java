@@ -67,18 +67,21 @@ public class Servlet extends HttpServlet {
 
     private void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        String path = request.getRequestURI();
-        logger.info(path);
-        path = path.replaceAll(".*/app/", "");
-        logger.info(path);
-        Command command = commands.getOrDefault(path,
-                (r) -> "/index.jsp)");
-        String page = command.execute(request);
-        if (page.contains("redirect")) {
-            response.sendRedirect(page.replace("redirect:", ""));
-        } else {
-            request.getRequestDispatcher(page).forward(request, response);
-        }
+try {
+    String path = request.getRequestURI();
+    logger.info(path);
+    path = path.replaceAll(".*/app/", "");
+    logger.info(path);
+    Command command = commands.getOrDefault(path,
+            (r) -> "/index.jsp)");
+    String page = command.execute(request);
+    if (page.contains("redirect")) {
+        response.sendRedirect(page.replace("redirect:", ""));
+    } else {
+        request.getRequestDispatcher(page).forward(request, response);
     }
+} catch (java.lang.Exception e) {
+    return ;
+}
+}
 }

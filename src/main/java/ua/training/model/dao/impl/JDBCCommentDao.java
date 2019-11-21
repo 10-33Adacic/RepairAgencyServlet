@@ -10,11 +10,16 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 
 public class JDBCCommentDao implements CommentDao {
-    private String queryAdd = "INSERT INTO comment ( comment, user_id, date) VALUES (?,?,?)";
-    private String queryFindAll = "SELECT * FROM comment LIMIT ?,? ";
-    private String queryCount = "SELECT COUNT(*) FROM comment";
+    private final ResourceBundle bundle = ResourceBundle.getBundle("queries");
+
+    //TODO: delete this after removing to properties
+//    private String queryAdd = "INSERT INTO comment ( comment, user_id, date) VALUES (?,?,?)";
+//    private String queryFindAll = "SELECT * FROM comment LIMIT ?,? ";
+//    private String queryCount = "SELECT COUNT(*) FROM comment";
+
     private Connection connection;
     private UserDao userDao;
 
@@ -29,7 +34,7 @@ public class JDBCCommentDao implements CommentDao {
     public long findCount() {
         long count = 0;
 
-        try (PreparedStatement pstmt = connection.prepareStatement(queryCount)) {
+        try (PreparedStatement pstmt = connection.prepareStatement(bundle.getString("query.count.comment"))) {
 
             try (ResultSet resultSet = pstmt.executeQuery()) {
                 if (resultSet.next()) {
@@ -44,7 +49,7 @@ public class JDBCCommentDao implements CommentDao {
 
     @Override
     public void add(Comment entity) {
-        try (PreparedStatement ps = connection.prepareStatement(queryAdd)) {
+        try (PreparedStatement ps = connection.prepareStatement(bundle.getString("query.add.comment"))) {
             ps.setString(1, entity.getComment());
             ps.setLong(2, entity.getUser().getId());
             ps.setDate(3, Date.valueOf(LocalDate.now(Clock.system(ZoneId.of("Europe/Kiev")))));
@@ -63,7 +68,7 @@ public class JDBCCommentDao implements CommentDao {
     @Override
     public List<Comment> findAll(int page, int size) {
         List<Comment> resultList = new ArrayList<>();
-        try (PreparedStatement ps = connection.prepareStatement(queryFindAll)) {
+        try (PreparedStatement ps = connection.prepareStatement(bundle.getString("query.find.all.comments"))) {
             ps.setInt(1, (page - 1) * size);
             ps.setInt(2, size);
             ResultSet rs = ps.executeQuery();

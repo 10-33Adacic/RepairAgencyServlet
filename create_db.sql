@@ -47,7 +47,7 @@ CREATE TABLE `user` (
 
   `id` int(11) NOT NULL AUTO_INCREMENT,
 
-  `email` varchar(30) NOT NULL,
+  `email` varchar(64) NOT NULL,
 
   `password` varchar(70) NOT NULL,
 
