@@ -15,7 +15,7 @@ public class JDBCUserDao implements UserDao {
     private String queryAddRole = "INSERT INTO  user_role(user_id,role_id) VALUES(?,?)";
     private String queryFindByEmail = "SELECT id,email,password,active , role_id FROM user  INNER JOIN user_role ON user.id=user_role.user_id WHERE email = ?";
     private String queryFindAll = "SELECT * FROM user";
-    private String queryFindById = "SELECT * FROM user where id=?";
+    private String queryFindById = "SELECT * FROM user where id = ?";
     private String queryUpdateUser = "UPDATE user SET email = ? , password = ?,  active = ? WHERE id = ?";
     private String queryUpdateRole = "UPDATE user_role SET role_id=? WHERE user_id=?";
     private String queryDeleteById = "DELETE FROM user WHERE id = ?";
@@ -37,6 +37,11 @@ public class JDBCUserDao implements UserDao {
                 ps.setString(2, entity.getPassword());
                 ps.setBoolean(3, entity.isActive());
                 ps.executeUpdate();
+
+                //TODO:Delete this after test
+                System.out.println("First sout" + entity.getEmail());
+                System.out.println("Second sout" + entity.getId());
+                System.out.println("Third sout" + findByEmail(entity.getEmail()).getId());
 
                 ps1.setLong(1, findByEmail(entity.getEmail()).getId());
                 ps1.setLong(2, Arrays.asList(Role.values()).indexOf(entity.getRole()) + 1);
