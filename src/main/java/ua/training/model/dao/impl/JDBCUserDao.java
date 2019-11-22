@@ -41,10 +41,12 @@ public class JDBCUserDao implements UserDao {
 
     @Override
     public void add(User entity) throws SQLException {
-        try (PreparedStatement ps = connection.prepareStatement(bundle.getString("query.add.user"))) {
+        try (PreparedStatement ps = connection.prepareStatement(bundle.getString("query.add.user")); PreparedStatement ps1 = connection.prepareStatement(bundle.getString("query.add.role"))) {
+
             //TODO: delete second try
-            try (PreparedStatement ps1 = connection.prepareStatement(bundle.getString("query.add.role"))) {
+//            try (PreparedStatement ps1 = connection.prepareStatement(bundle.getString("query.add.role"))) {
 //                connection.setAutoCommit(false);
+
                 ps.setString(1, entity.getEmail());
                 ps.setString(2, entity.getPassword());
                 ps.setBoolean(3, entity.isActive());
@@ -68,7 +70,7 @@ public class JDBCUserDao implements UserDao {
 //        catch (SQLException e) {
 //            throw new RuntimeException("Invalid input");
 //        }
-    }
+//    }
 
     @Override
     public User findByEmail(String email) {
