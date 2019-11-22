@@ -15,6 +15,8 @@ class CommandUtility {
     }
 
     static boolean checkUserIsLogged(HttpServletRequest request, String email) {
+
+        //TODO: refactor
         @SuppressWarnings("unchecked")
         HashSet<String> loggedUsers = (HashSet<String>) request.getSession()
                 .getServletContext().getAttribute("loggedUsers");
@@ -29,11 +31,13 @@ class CommandUtility {
         HttpSession session = request.getSession();
         ServletContext context = request.getSession().getServletContext();
         String email = (String) context.getAttribute("userEmail");
+
+        //TODO: refactor
         @SuppressWarnings("unchecked")
         HashSet<String> loggedUsers = (HashSet<String>) request.getSession()
                 .getServletContext().getAttribute("loggedUsers");
         loggedUsers.remove(email);
         request.getSession().getServletContext().setAttribute("loggedUsers", loggedUsers);
-        //setUserRole(request, Role.ROLE_GUEST, "Guest");
+        //setUserRole(request, Role.GUEST, "Guest");
     }
 }

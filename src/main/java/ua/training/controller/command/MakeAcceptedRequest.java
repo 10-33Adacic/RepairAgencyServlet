@@ -23,7 +23,7 @@ public class MakeAcceptedRequest implements Command {
             request.setAttribute("id", id);
             request.setAttribute("masters",userService.findByRole(Arrays
                     .asList(Role.values())
-                    .indexOf(Role.ROLE_MASTER)+1).get());
+                    .indexOf(Role.MASTER)+1).get());
 
         }catch( java.lang.Exception e) {
             e.printStackTrace();

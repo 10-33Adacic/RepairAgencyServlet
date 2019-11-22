@@ -24,7 +24,11 @@ public class Registration implements Command {
         String email = request.getParameter("email");
         String password = request.getParameter("pass");
         String role = request.getParameter("role");
-        logger.info("Regisatation: " + name + " " + email + " " + " " + password);
+        logger.info("Regisatation: "
+                + "name: " + name + "   "
+                + "email: " + email + "   "
+                + "password: " + password + "   "
+                + "role: " + role);
 
         if (name == null || name.equals("") || password == null || password.equals("") || email == null || email.equals("")) {
             return "/registration.jsp";
@@ -32,18 +36,18 @@ public class Registration implements Command {
         try {
             if (userService.findUserEmail(email).isPresent()) {
                 request.setAttribute("error", true);
-//                request.setAttribute("inwalidInput", "User with this email already exist");
+//                request.setAttribute("invalidInput", "User with this email already exist");
                 return "/registration.jsp";
 //                throw new RuntimeException("User with this email already exist");
 
             }
             String userRole = "";
-            if (role.equals("ROLE_USER"))
-                userRole = Role.ROLE_USER.name();
-            if (role.equals("ROLE_MASTER"))
-                userRole = Role.ROLE_MASTER.name();
-            if (role.equals("ROLE_MANAGER"))
-                userRole = Role.ROLE_MANAGER.name();
+            if (role.equals("USER"))
+                userRole = Role.USER.name();
+            if (role.equals("MASTER"))
+                userRole = Role.MASTER.name();
+            if (role.equals("MANAGER"))
+                userRole = Role.MANAGER.name();
 
             userService.addUser(
                     UserDTO.builder().email(email)

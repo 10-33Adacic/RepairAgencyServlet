@@ -10,13 +10,13 @@ public class User {
     private boolean active;
 
     //TODO: try to delete this, left only builder
-    public User(){}
-    public User(Long id, String email, String name, String password) {
-        this.id = id;
-        this.email = email;
-        this.password = password;
-        this.name=name;
-    }
+//    public User(){}
+//    public User(Long id, String email, String name, String password) {
+//        this.id = id;
+//        this.email = email;
+//        this.password = password;
+//        this.name=name;
+//    }
 
     public Long getId() {
         return id;

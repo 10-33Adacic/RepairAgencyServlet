@@ -56,14 +56,14 @@
                     <fmt:message key="message.select.role"/>
                 </label>
                 <select name="role" path="roles" class="selectpicker">
-                    <option value="ROLE_USER">
-                        ROLE_USER
+                    <option value="USER">
+                        USER
                     </option >
-                    <option  value="ROLE_MASTER">
-                        ROLE_MASTER
+                    <option  value="MASTER">
+                        MASTER
                     </option >
-                    <option  value="ROLE_MANAGER">
-                        ROLE_MANAGER
+                    <option  value="MANAGER">
+                        MANAGER
                     </option >
                 </select>
             </div><br/>

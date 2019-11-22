@@ -19,6 +19,7 @@ public class AuthFilter implements Filter {
 
         HttpSession session = req.getSession();
         ServletContext context = session.getServletContext();
+
         //TODO: Delete this after test
         System.out.println("------------------------------------------------");
         System.out.println(session);

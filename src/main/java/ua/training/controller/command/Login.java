@@ -40,20 +40,20 @@ public class Login implements Command {
         if (CommandUtility.checkUserIsLogged(request, email)) {
             request.setAttribute("error", true);
             logger.info("User email " + email + " already logged.");
-            throw new RuntimeException("You already logged");
+            throw new RuntimeException("You are already logged");
         }
         logger.info("User email " + email + " logged successfully.");
 
         request.getSession(true).setAttribute("userName", email);
 
-        if (user.get().getRole().equals(Role.ROLE_MASTER)) {
-            CommandUtility.setUserRole(request, Role.ROLE_MASTER, email);
+        if (user.get().getRole().equals(Role.MASTER)) {
+            CommandUtility.setUserRole(request, Role.MASTER, email);
             return "redirect:/api/app/master/accepted_requests";
-        } else if (user.get().getRole().equals(Role.ROLE_USER)) {
-            CommandUtility.setUserRole(request, Role.ROLE_USER, email);
+        } else if (user.get().getRole().equals(Role.USER)) {
+            CommandUtility.setUserRole(request, Role.USER, email);
             return "redirect:/api/app/user/create_request";
-        } else if (user.get().getRole().equals(Role.ROLE_MANAGER)) {
-            CommandUtility.setUserRole(request, Role.ROLE_MANAGER, email);
+        } else if (user.get().getRole().equals(Role.MANAGER)) {
+            CommandUtility.setUserRole(request, Role.MANAGER, email);
             return "redirect:/api/app/manager/new_requests";
         }else {
             return "redirect:/index.jsp";

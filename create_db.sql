@@ -47,6 +47,8 @@ CREATE TABLE `user` (
 
   `id` int(11) NOT NULL AUTO_INCREMENT,
 
+  `name` varchar(255) NOT NULL,
+
   `email` varchar(64) NOT NULL,
 
   `password` varchar(128) NOT NULL,
@@ -57,6 +59,8 @@ CREATE TABLE `user` (
 
   PRIMARY KEY (`id`)
 );
+
+CREATE UNIQUE INDEX user_email_uindex ON rep_service.user (email);
 
 # CREATE TABLE `user_role` (
 #
@@ -73,11 +77,11 @@ INSERT INTO `rep_service`.`user` (`email`, `password`, `active`) VALUES ('master
 INSERT INTO `rep_service`.`user` (`email`, `password`, `active`) VALUES ('u@u.u', '11111', '1');
 
 
-# INSERT INTO `rep_service`.`role` (`id`, `name`) VALUES ('1', 'ROLE_USER');
+# INSERT INTO `rep_service`.`role` (`id`, `name`) VALUES ('1', 'USER');
 #
-# INSERT INTO `rep_service`.`role` (`id`, `name`) VALUES ('2', 'ROLE_MANAGER');
+# INSERT INTO `rep_service`.`role` (`id`, `name`) VALUES ('2', 'MANAGER');
 #
-# INSERT INTO `rep_service`.`role` (`id`, `name`) VALUES ('3', 'ROLE_MASTER');
+# INSERT INTO `rep_service`.`role` (`id`, `name`) VALUES ('3', 'MASTER');
 
 
 # INSERT INTO `rep_service`.`user_role` (`user_id`, `role_id`) VALUES ('1', '2');
