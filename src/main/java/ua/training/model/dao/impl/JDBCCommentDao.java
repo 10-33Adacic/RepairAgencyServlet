@@ -14,12 +14,6 @@ import java.util.ResourceBundle;
 
 public class JDBCCommentDao implements CommentDao {
     private final ResourceBundle bundle = ResourceBundle.getBundle("queries");
-
-    //TODO: delete this after removing to properties
-//    private String queryAdd = "INSERT INTO comment ( comment, user_id, date) VALUES (?,?,?)";
-//    private String queryFindAll = "SELECT * FROM comment LIMIT ?,? ";
-//    private String queryCount = "SELECT COUNT(*) FROM comment";
-
     private Connection connection;
     private UserDao userDao;
 

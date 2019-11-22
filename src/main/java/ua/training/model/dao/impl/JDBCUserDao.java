@@ -15,24 +15,6 @@ public class JDBCUserDao implements UserDao {
     private static UserMapper mapper = new UserMapper();
     private final ResourceBundle bundle = ResourceBundle.getBundle("queries");
 
-    //TODO: delete this after removing to properties
-//    private String QUERY_ADD = "INSERT INTO user (email , password ,  active) VALUES (? ,? ,? )";
-//    private String queryAddRole = "INSERT INTO  user_role(user_id,role_id) VALUES(?,?)";
-//    private String queryFindByEmail = "SELECT id,email,password,active , role_id FROM user  INNER JOIN user_role ON user.id=user_role.user_id WHERE email = ?";
-//    private String queryFindAll = "SELECT * FROM user";
-    private String queryFindById = "SELECT * FROM user where id = ?";
-//    private String queryUpdateUser = "UPDATE user SET email = ? , password = ?,  active = ? WHERE id = ?";
-//    private String queryUpdateRole = "UPDATE user_role SET role_id=? WHERE user_id=?";
-//    private String queryDeleteById = "DELETE FROM user WHERE id = ?";
-//    private String queryCount = "SELECT COUNT(*) FROM request";
-
-//    private String queryFindByRole = "SELECT id,email,password,active , role_id FROM reg_form.user  INNER JOIN reg_form.user_role ON user.id=user_role.user_id WHERE role_id = ?";
-
-    private static final String QUERY_USER_FIND_BY_ID =
-            "SELECT * FROM user WHERE id = ?";
-
-
-
     private Connection connection;
 
     JDBCUserDao(Connection connection) {
@@ -64,13 +46,13 @@ public class JDBCUserDao implements UserDao {
                 ps1.executeUpdate();*/
                 /*connection.commit();
                 connection.setAutoCommit(true);*/
-            }
+//            }
         }
-//
-//        catch (SQLException e) {
-//            throw new RuntimeException("Invalid input");
-//        }
-//    }
+
+        catch (SQLException e) {
+            throw new RuntimeException("Invalid input");
+        }
+    }
 
     @Override
     public User findByEmail(String email) {

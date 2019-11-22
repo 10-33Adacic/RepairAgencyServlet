@@ -14,10 +14,7 @@ public class ConnectionPoolHolder {
                 if (dataSource == null) {
                     BasicDataSource ds = new BasicDataSource();
                     ds.setDriverClassName("com.mysql.cj.jdbc.Driver");
-
-//                    ds.setUrl("jdbc:mysql://localhost:3306/rep_service?useTimezone=true&serverTimezone=UTC&verifyServerCertificate=false&useSSL=false&requireSSL=false&allowPublicKeyRetrieval=true");
                     ds.setUrl("jdbc:mysql://localhost:3306/rep_service?useTimezone=true&serverTimezone=UTC");
-//                    ds.setUrl("jdbc:mysql://localhost:3306/service_db?useTimezone=true&serverTimezone=UTC");
                     ds.setUsername("root");
                     ds.setPassword("root");
                     ds.setMinIdle(5);

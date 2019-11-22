@@ -12,21 +12,6 @@ import java.util.ResourceBundle;
 public class JDBCRequestDao implements RequestDao {
     private final ResourceBundle bundle = ResourceBundle.getBundle("queries");
 
-    //TODO: delete this after removing to properties
-//    private String queryAdd = "INSERT INTO request ( request, status, price, creator) VALUES (?,?,?,?)";
-//    private String queryFindAll = "SELECT * FROM request LIMIT ?, ?";
-//    private String queryFindByCreatorAndStatus = "SELECT * FROM request WHERE creator=? AND status=? ";
-//    private String queryFindByCreatorAndNotStatus = "SELECT * FROM request WHERE creator=? AND status !=? LIMIT  ?,?";
-//    private String queryUpdateRequest = "UPDATE request SET status = ? WHERE id = ?";
-//    private String queryDeleteById = "DELETE FROM request  WHERE id = ?";
-//    private String queryFindByMasterAndStatus = "SELECT request.* FROM request  INNER JOIN user  ON request.user_id=user.id WHERE user.email=? AND request.status=? LIMIT ?, ?";
-//    private String queryCount = "SELECT COUNT(*) FROM request";
-
-//    private String queryFindByStatus="SELECT request.* FROM request WHERE request.status=?";
-
-//    private String queryUpdateStatusAndPriceandMaster="UPDATE request SET status = ?, price=?, user_id=? WHERE id = ?";
-//    private String queryUpdateStatusAndReason="UPDATE request SET status = ?, reason=? WHERE id = ?";
-
     private Connection connection;
 
     JDBCRequestDao(Connection connection) {
