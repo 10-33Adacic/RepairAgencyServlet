@@ -1,5 +1,6 @@
 package ua.training.model.dao.mapper;
 
+import ua.training.model.entity.Role;
 import ua.training.model.entity.User;
 
 import java.sql.ResultSet;
@@ -13,6 +14,7 @@ public class UserMapper {
                 .email(rs.getString("email"))
                 .password(rs.getString("password"))
                 .active(rs.getBoolean("active"))
+                .role(Role.valueOf(rs.getString("role")))
                 .build();
     }
 

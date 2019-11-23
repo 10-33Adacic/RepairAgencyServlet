@@ -12,26 +12,33 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class JDBCUserDao implements UserDao {
-    private static UserMapper mapper = new UserMapper();
+    private static UserMapper mapper;
     private final ResourceBundle bundle = ResourceBundle.getBundle("queries");
 
     private Connection connection;
 
     JDBCUserDao(Connection connection) {
+
         this.connection = connection;
+        mapper = new UserMapper();
     }
 
     @Override
     public void add(User entity) throws SQLException {
-        try (PreparedStatement ps = connection.prepareStatement(bundle.getString("query.add.user")); PreparedStatement ps1 = connection.prepareStatement(bundle.getString("query.add.role"))) {
+        try (PreparedStatement ps = connection.prepareStatement(bundle.getString("query.add.user"))
+//             ; PreparedStatement ps1 = connection.prepareStatement(bundle.getString("query.add.role"))
+        ) {
 
             //TODO: delete second try
 //            try (PreparedStatement ps1 = connection.prepareStatement(bundle.getString("query.add.role"))) {
 //                connection.setAutoCommit(false);
 
-                ps.setString(1, entity.getEmail());
-                ps.setString(2, entity.getPassword());
-                ps.setBoolean(3, entity.isActive());
+                ps.setString(1, entity.getName());
+                ps.setString(2, entity.getEmail());
+                ps.setString(3, entity.getPassword());
+                ps.setString(4, entity.getRole().name());
+                ps.setBoolean(5, entity.isActive());
+
                 ps.executeUpdate();
 
 
@@ -61,7 +68,7 @@ public class JDBCUserDao implements UserDao {
             ps.setString(1, email);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                return extractFromResultSet(rs);
+                return mapper.extractFromResultSet(rs);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -76,7 +83,7 @@ public class JDBCUserDao implements UserDao {
             ResultSet rs = ps.executeQuery(bundle.getString("query.find.all"));
 
             while (rs.next()) {
-                User result = extractFromResultSet(rs);
+                User result = mapper.extractFromResultSet(rs);
                 resultList.add(result);
             }
         } catch (SQLException e) {
@@ -130,15 +137,18 @@ public class JDBCUserDao implements UserDao {
         }
     }
 
-    private User extractFromResultSet(ResultSet rs)
-            throws SQLException {
-        return User.builder()
-                .id(rs.getLong("id"))
-                .email(rs.getString("email"))
-                .password(rs.getString("password"))
-                .role(Role.values()[rs.getInt("role_id") - 1])
-                .active(rs.getBoolean("active"))
-                .build();
+    public class UserMapper {
+
+        private User extractFromResultSet(ResultSet rs)
+                throws SQLException {
+            return User.builder()
+                    .id(rs.getLong("id"))
+                    .email(rs.getString("email"))
+                    .password(rs.getString("password"))
+                    .role(Role.values()[rs.getInt("role_id") - 1])
+                    .active(rs.getBoolean("active"))
+                    .build();
+        }
     }
 
     @Override
@@ -148,7 +158,7 @@ public class JDBCUserDao implements UserDao {
             ps.setLong(1, id);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                return extractFromResultSet(rs);
+                return mapper.extractFromResultSet(rs);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -165,7 +175,7 @@ public class JDBCUserDao implements UserDao {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                User result = extractFromResultSet(rs);
+                User result = mapper.extractFromResultSet(rs);
                 resultList.add(result);
             }
         } catch (SQLException e) {
@@ -189,5 +199,25 @@ public class JDBCUserDao implements UserDao {
             throw new RuntimeException(e);
         }
         return count;
+    }
+
+    //TODO: refactor method name to findByEmailAndPassword
+    @Override
+    public User findByUsernameAndPassword (String email, String password) {
+        try (PreparedStatement ps =
+                     connection.prepareStatement(bundle.getString("query.find.by.email.and.password"))
+        ) {
+            ps.setString(1, email);
+            ps.setString(2, password);
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                return mapper.extractFromResultSet(rs);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return null;
     }
 }

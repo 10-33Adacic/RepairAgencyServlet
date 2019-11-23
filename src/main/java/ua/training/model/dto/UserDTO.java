@@ -48,7 +48,6 @@ public class UserDTO {
         private Builder() {
         }
 
-
         public Builder email(String email) {
             UserDTO.this.email = email;
             return this;

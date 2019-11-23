@@ -1,6 +1,7 @@
 package ua.training.controller.command;
 
 import ua.training.model.entity.Role;
+import ua.training.model.entity.User;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -12,6 +13,16 @@ class CommandUtility {
         HttpSession session = request.getSession();
         session.setAttribute("userEmail", email);
         session.setAttribute("role", role);
+    }
+
+    public static void setUser(HttpServletRequest request, User user) {
+        HttpSession session = request.getSession();
+
+        session.setAttribute("user", user);
+        session.setAttribute("email", user.getEmail());
+        session.setAttribute("userId", user.getId());
+        session.setAttribute("role",user.getRole());
+        session.setAttribute("access", user.getRole().name());
     }
 
     static boolean checkUserIsLogged(HttpServletRequest request, String email) {
