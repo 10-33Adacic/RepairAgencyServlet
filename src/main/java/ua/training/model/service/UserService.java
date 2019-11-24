@@ -44,20 +44,22 @@ public class UserService {
 //    }
 
     //TODO: test method
-    public Optional<User> findUser(String username, String password){
+    public Optional<User> findUser(String email, String password){
         try (UserDao userDao = daoFactory.createUserDao()) {
             Optional<User> user =
                     Optional.ofNullable(
-                            userDao.findByUsernameAndPassword(
-                                    username, password));
+                            userDao.findByEmailAndPassword(
+                                    email, password));
             return user;
         }
     }
 
+    //TODO: Dublicate 1
     public Optional<User> findUserEmail(String email){
         return Optional.ofNullable((userDao.findByEmail(email)));
     }
 
+    //TODO: Dublicate 2
     public Optional<User> findByEmail(String email){
         return Optional.ofNullable(userDao.findByEmail(email));
     }

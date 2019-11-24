@@ -8,5 +8,5 @@ public interface UserDao extends GenericDao<User> {
     User findById(Long id);
     List<User> findByRole(Integer role);
     //TODO: delete this after tests
-    User findByUsernameAndPassword (String email, String password);
+    User findByEmailAndPassword (String email, String password);
 }

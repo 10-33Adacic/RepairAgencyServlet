@@ -7,6 +7,8 @@ public class LogOut implements Command {
     public String execute(HttpServletRequest request) {
         request.getSession().invalidate();
         CommandUtility.deleteUserFromContextAndSession(request);
-        return "redirect:/api";
+//        return "redirect:/app";
+        return "/login.jsp";
+//        return "redirect:/";
     }
 }

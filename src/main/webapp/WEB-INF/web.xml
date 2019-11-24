@@ -13,13 +13,13 @@
   </servlet-mapping>
 
   <welcome-file-list>
-  <welcome-file>index.jsp</welcome-file>
-</welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
 
   <filter>
-  <filter-name>EncodingFilter</filter-name>
-  <filter-class>ua.training.controller.filters.EncodingFilter</filter-class>
-</filter>
+    <filter-name>EncodingFilter</filter-name>
+    <filter-class>ua.training.controller.filters.EncodingFilter</filter-class>
+  </filter>
   <filter-mapping>
     <filter-name>EncodingFilter</filter-name>
     <url-pattern>/*</url-pattern>

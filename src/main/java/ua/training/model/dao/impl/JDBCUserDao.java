@@ -92,27 +92,46 @@ public class JDBCUserDao implements UserDao {
         return resultList;
     }
 
+//    @Override
+//    public void update(User entity) {
+//        try (PreparedStatement ps = connection.prepareStatement(
+//                bundle.getString("query.update.user"))) {
+//            try (PreparedStatement ps1 = connection.prepareStatement(bundle.getString("query.update.role"))) {
+//                connection.setAutoCommit(false);
+//                ps.setString(1, entity.getEmail());
+//                ps.setString(2, entity.getPassword());
+////                ps.setInt(3, Arrays.asList(Role.values()).indexOf(entity.getRole()));
+//                ps.setBoolean(3, entity.isActive());
+//                ps.setLong(4, entity.getId());
+//                ps.executeUpdate();
+//
+//                ps1.setLong(1, Arrays.asList(Role.values()).indexOf(entity.getRole()) + 1);
+//                ps1.setLong(2, entity.getId());
+//                ps1.executeUpdate();
+//
+//                connection.commit();
+//            }
+//        }
+//        catch (SQLException e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
+
     @Override
     public void update(User entity) {
-        try (PreparedStatement ps = connection.prepareStatement(
-                bundle.getString("query.update.user"))) {
-            try (PreparedStatement ps1 = connection.prepareStatement(bundle.getString("query.update.role"))) {
-                connection.setAutoCommit(false);
-                ps.setString(1, entity.getEmail());
-                ps.setString(2, entity.getPassword());
-//                ps.setInt(3, Arrays.asList(Role.values()).indexOf(entity.getRole()));
-                ps.setBoolean(3, entity.isActive());
-                ps.setLong(4, entity.getId());
-                ps.executeUpdate();
+        try (PreparedStatement ps =
+                     connection.prepareStatement(
+                             bundle.getString("query.update.role"))
+        ) {
+            ps.setString(1, entity.getName());
+            ps.setString(2, entity.getEmail());
+            ps.setString(3, entity.getPassword());
+            ps.setString(4, entity.getRole().name());
+            ps.setBoolean(5, entity.isActive());
+            ps.setLong(6, entity.getId());
 
-                ps1.setLong(1, Arrays.asList(Role.values()).indexOf(entity.getRole()) + 1);
-                ps1.setLong(2, entity.getId());
-                ps1.executeUpdate();
-
-                connection.commit();
-            }
-        }
-        catch (SQLException e) {
+            ps.executeUpdate();
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
@@ -134,20 +153,6 @@ public class JDBCUserDao implements UserDao {
             connection.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
-        }
-    }
-
-    public class UserMapper {
-
-        private User extractFromResultSet(ResultSet rs)
-                throws SQLException {
-            return User.builder()
-                    .id(rs.getLong("id"))
-                    .email(rs.getString("email"))
-                    .password(rs.getString("password"))
-                    .role(Role.values()[rs.getInt("role_id") - 1])
-                    .active(rs.getBoolean("active"))
-                    .build();
         }
     }
 
@@ -201,9 +206,8 @@ public class JDBCUserDao implements UserDao {
         return count;
     }
 
-    //TODO: refactor method name to findByEmailAndPassword
     @Override
-    public User findByUsernameAndPassword (String email, String password) {
+    public User findByEmailAndPassword (String email, String password) {
         try (PreparedStatement ps =
                      connection.prepareStatement(bundle.getString("query.find.by.email.and.password"))
         ) {
