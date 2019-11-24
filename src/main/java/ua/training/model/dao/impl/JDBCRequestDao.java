@@ -1,6 +1,7 @@
 package ua.training.model.dao.impl;
 
 import ua.training.model.dao.RequestDao;
+import ua.training.model.dao.mapper.RequestMapper;
 import ua.training.model.entity.Request;
 import ua.training.model.entity.User;
 
@@ -10,12 +11,14 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class JDBCRequestDao implements RequestDao {
+    private static RequestMapper requestMapper;
     private final ResourceBundle bundle = ResourceBundle.getBundle("queries");
 
     private Connection connection;
 
     JDBCRequestDao(Connection connection) {
         this.connection = connection;
+        requestMapper = new RequestMapper();
     }
 
     @Override
@@ -46,7 +49,7 @@ public class JDBCRequestDao implements RequestDao {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                Request result = extractFromResultSet(rs);
+                Request result = requestMapper.extractFromResultSet(rs);
                 resultList.add(result);
             }
         } catch (SQLException e) {
@@ -64,7 +67,7 @@ public class JDBCRequestDao implements RequestDao {
             ps.setString(2, status);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                resultList.add(extractFromResultSet(rs));
+                resultList.add(requestMapper.extractFromResultSet(rs));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -83,7 +86,7 @@ public class JDBCRequestDao implements RequestDao {
             ps.setInt(4, size);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                resultList.add(extractFromResultSet(rs));
+                resultList.add(requestMapper.extractFromResultSet(rs));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -102,7 +105,7 @@ public class JDBCRequestDao implements RequestDao {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                resultList.add(extractFromResultSet(rs));
+                resultList.add(requestMapper.extractFromResultSet(rs));
 
             }
         } catch (SQLException e) {
@@ -120,7 +123,7 @@ public class JDBCRequestDao implements RequestDao {
 
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                resultList.add(extractFromResultSet(rs));
+                resultList.add(requestMapper.extractFromResultSet(rs));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -204,16 +207,16 @@ public class JDBCRequestDao implements RequestDao {
         return count;
     }
 
-    private Request extractFromResultSet(ResultSet rs)
-            throws SQLException {
-        return Request.builder()
-                .id(rs.getLong("id"))
-                .request(rs.getString("request"))
-                .status(rs.getString("status"))
-                .price(rs.getLong("price"))
-                .reason(rs.getString("reason"))
-                .creator(rs.getString("creator"))
-//                .requestNumber(rs.getLong("request_number"))
-                .build();
-    }
+//    private Request extractFromResultSet(ResultSet rs)
+//            throws SQLException {
+//        return Request.builder()
+//                .id(rs.getLong("id"))
+//                .request(rs.getString("request"))
+//                .status(rs.getString("status"))
+//                .price(rs.getLong("price"))
+//                .reason(rs.getString("reason"))
+//                .creator(rs.getString("creator"))
+////                .requestNumber(rs.getLong("request_number"))
+//                .build();
+//    }
 }

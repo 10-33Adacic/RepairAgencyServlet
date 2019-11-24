@@ -19,6 +19,8 @@
 
 </head>
 <body>
+<a class="btn"
+   href="/index.jsp"><img src="${pageContext.request.contextPath}/static/home64.png" height="30px"/></a>
 <a class="btn" id="locales"
    href="?sessionLocale=en"><img src="${pageContext.request.contextPath}/static/United-Kingdom-flag-icon.png" height="30px"/></a>
 <a class="btn"
