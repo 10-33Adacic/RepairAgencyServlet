@@ -25,7 +25,6 @@ public class MakeInProgress implements Command {
         }catch( java.lang.Exception e) {
             e.printStackTrace();
         }
-//        return "redirect:/api/app/master/accepted_requests";
         return "redirect:/app/master/accepted_requests";
     }
 }

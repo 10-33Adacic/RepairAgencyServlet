@@ -25,12 +25,7 @@ public class JDBCUserDao implements UserDao {
 
     @Override
     public void add(User entity) throws SQLException {
-        try (PreparedStatement ps = connection.prepareStatement(bundle.getString("query.add.user"))
-//             ; PreparedStatement ps1 = connection.prepareStatement(bundle.getString("query.add.role"))
-        ) {
-
-            //TODO: delete second try
-//            try (PreparedStatement ps1 = connection.prepareStatement(bundle.getString("query.add.role"))) {
+        try (PreparedStatement ps = connection.prepareStatement(bundle.getString("query.add.user"))) {
 //                connection.setAutoCommit(false);
 
                 ps.setString(1, entity.getName());
@@ -40,20 +35,6 @@ public class JDBCUserDao implements UserDao {
                 ps.setBoolean(5, entity.isActive());
 
                 ps.executeUpdate();
-
-
-/*
-                //TODO:Delete this after test
-                System.out.println("First sout" + currentUser.getEmail());
-//                System.out.println("Second sout" + entity.getId());
-                System.out.println("Third sout" + currentUser.getId());*/
-
-               /* ps1.setLong(1, currentUser.getId());
-                ps1.setLong(2, );
-                ps1.executeUpdate();*/
-                /*connection.commit();
-                connection.setAutoCommit(true);*/
-//            }
         }
 
         catch (SQLException e) {
@@ -91,31 +72,6 @@ public class JDBCUserDao implements UserDao {
         }
         return resultList;
     }
-
-//    @Override
-//    public void update(User entity) {
-//        try (PreparedStatement ps = connection.prepareStatement(
-//                bundle.getString("query.update.user"))) {
-//            try (PreparedStatement ps1 = connection.prepareStatement(bundle.getString("query.update.role"))) {
-//                connection.setAutoCommit(false);
-//                ps.setString(1, entity.getEmail());
-//                ps.setString(2, entity.getPassword());
-////                ps.setInt(3, Arrays.asList(Role.values()).indexOf(entity.getRole()));
-//                ps.setBoolean(3, entity.isActive());
-//                ps.setLong(4, entity.getId());
-//                ps.executeUpdate();
-//
-//                ps1.setLong(1, Arrays.asList(Role.values()).indexOf(entity.getRole()) + 1);
-//                ps1.setLong(2, entity.getId());
-//                ps1.executeUpdate();
-//
-//                connection.commit();
-//            }
-//        }
-//        catch (SQLException e) {
-//            throw new RuntimeException(e);
-//        }
-//    }
 
     @Override
     public void update(User entity) {

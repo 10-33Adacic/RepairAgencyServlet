@@ -7,6 +7,5 @@ import java.util.List;
 public interface UserDao extends GenericDao<User> {
     User findById(Long id);
     List<User> findByRole(Integer role);
-    //TODO: delete this after tests
     User findByEmailAndPassword (String email, String password);
 }

@@ -196,7 +196,7 @@ public class JDBCRequestDao implements RequestDao {
 
         try (PreparedStatement pstmt = connection.prepareStatement(bundle.getString("query.count.request"))) {
 
-            try (ResultSet resultSet = pstmt.executeQuery();) {
+            try (ResultSet resultSet = pstmt.executeQuery()) {
                 if (resultSet.next()) {
                     count = resultSet.getLong(1);
                 }
@@ -206,17 +206,4 @@ public class JDBCRequestDao implements RequestDao {
         }
         return count;
     }
-
-//    private Request extractFromResultSet(ResultSet rs)
-//            throws SQLException {
-//        return Request.builder()
-//                .id(rs.getLong("id"))
-//                .request(rs.getString("request"))
-//                .status(rs.getString("status"))
-//                .price(rs.getLong("price"))
-//                .reason(rs.getString("reason"))
-//                .creator(rs.getString("creator"))
-////                .requestNumber(rs.getLong("request_number"))
-//                .build();
-//    }
 }

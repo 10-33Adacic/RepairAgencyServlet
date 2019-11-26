@@ -25,7 +25,6 @@ public class MakeBeyondRepair implements Command {
         }catch( java.lang.Exception e) {
             e.printStackTrace();
         }
-//        return "redirect:/api/app/master/in_progress_requests";
         return "redirect:/app/master/in_progress_requests";
     }
 }

@@ -1,6 +1,5 @@
 package ua.training.model.dao.mapper;
 
-import ua.training.model.entity.Comment;
 import ua.training.model.entity.Request;
 
 import java.sql.ResultSet;

@@ -36,7 +36,6 @@ public class Registration implements Command {
         try {
             if (userService.findUserEmail(email).isPresent()) {
                 request.setAttribute("error", true);
-//                request.setAttribute("invalidInput", "User with this email already exist");
                 return "/registration.jsp";
 //                throw new RuntimeException("User with this email already exist");
 

@@ -23,7 +23,6 @@ public class MakeRequestRejectedDone implements Command {
         } catch (java.lang.Exception e) {
             e.printStackTrace();
         }
-//        return "redirect:/api/app/manager/new_requests";
         return "redirect:/app/manager/new_requests";
     }
 }
