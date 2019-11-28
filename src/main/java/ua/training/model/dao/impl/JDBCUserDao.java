@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class JDBCUserDao implements UserDao {
     private static UserMapper mapper;
@@ -180,4 +181,25 @@ public class JDBCUserDao implements UserDao {
         }
         return null;
     }
+
+    public List<User> findAllMasters() {
+        List<User> resultList = new CopyOnWriteArrayList<>();
+
+        try (PreparedStatement ps =
+                     connection.prepareStatement(bundle.getString("query.find.all.masters"))
+        ) {
+            ps.setString(1, "MASTER");
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                User result = mapper.extractFromResultSet(rs);
+                resultList.add(result);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return resultList;
+    }
+
+//     private static String QUERY_FIND_ALL_MASTERS = "SELECT * FROM user WHERE role = ?";
 }

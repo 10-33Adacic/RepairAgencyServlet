@@ -71,4 +71,8 @@ public class UserService {
     public Optional<List<User>>findByRole(Integer role){
         return Optional.ofNullable(userDao.findByRole(role));
     }
+
+    public List<User> findAllMasters() {
+       return userDao.findAllMasters();
+    }
 }

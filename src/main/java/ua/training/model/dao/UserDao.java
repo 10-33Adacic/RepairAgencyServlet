@@ -8,4 +8,5 @@ public interface UserDao extends GenericDao<User> {
     User findById(Long id);
     List<User> findByRole(Integer role);
     User findByEmailAndPassword (String email, String password);
+    List<User> findAllMasters();
 }
