@@ -34,15 +34,6 @@ CREATE TABLE `request` (
   PRIMARY KEY (`id`)
 );
 
-# CREATE TABLE `role` (
-#
-#   `id` int(11) NOT NULL AUTO_INCREMENT,
-#
-#   `name` varchar(15) NOT NULL,
-#
-#   PRIMARY KEY (`id`)
-# );
-
 CREATE TABLE `user` (
 
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -62,32 +53,13 @@ CREATE TABLE `user` (
 
 CREATE UNIQUE INDEX user_email_uindex ON rep_service.user (email);
 
-# CREATE TABLE `user_role` (
-#
-#   `user_id` int(11) NOT NULL,
-#
-#   `role_id` int(11) NOT NULL
-# );
 
+INSERT INTO `rep_service`.`user` (`name`, `email`, `password`, `active`, `role`) VALUES ('Adam', 'adam@sarif.com', '123456', '1', 'MANAGER');
 
-INSERT INTO `rep_service`.`user` (`email`, `password`, `active`) VALUES ('m@m.m', '11111', '1');
+INSERT INTO `rep_service`.`user` (`name`, `email`, `password`, `active`, `role`) VALUES ('David', 'arahnid@gmail.com', '123456', '1', 'USER');
 
-INSERT INTO `rep_service`.`user` (`email`, `password`, `active`) VALUES ('master1@m', '11111', '1');
+INSERT INTO `rep_service`.`user` (`name`, `email`, `password`, `active`, `role`) VALUES ('Garry', 'garry@yandex.ru', '123456', '1', 'MASTER');
 
-INSERT INTO `rep_service`.`user` (`email`, `password`, `active`) VALUES ('u@u.u', '11111', '1');
-
-
-# INSERT INTO `rep_service`.`role` (`id`, `name`) VALUES ('1', 'USER');
-#
-# INSERT INTO `rep_service`.`role` (`id`, `name`) VALUES ('2', 'MANAGER');
-#
-# INSERT INTO `rep_service`.`role` (`id`, `name`) VALUES ('3', 'MASTER');
-
-
-# INSERT INTO `rep_service`.`user_role` (`user_id`, `role_id`) VALUES ('1', '2');
-#
-# INSERT INTO `rep_service`.`user_role` (`user_id`, `role_id`) VALUES ('2', '3');
-# INSERT INTO `rep_service`.`user_role` (`user_id`, `role_id`) VALUES ('3', '1');
 
 INSERT INTO `rep_service`.`request` (`id`, `request`, `status`, `price`, `creator`) VALUES ('1', 'I have problem with front wheel. Please do smth with it', 'new', '0', 'u@u.u');
 
