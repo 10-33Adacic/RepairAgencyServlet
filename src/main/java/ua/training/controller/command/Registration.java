@@ -42,7 +42,7 @@ public class Registration implements Command {
         }
 
         try {
-            if (userService.findUserEmail(email).isPresent()) {
+            if (userService.findByEmail(email).isPresent()) {
                 request.setAttribute("error", true);
                 return "/registration.jsp";
             }

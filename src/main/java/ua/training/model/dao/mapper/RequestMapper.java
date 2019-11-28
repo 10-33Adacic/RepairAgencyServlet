@@ -15,7 +15,6 @@ public class RequestMapper {
                 .price(rs.getLong("price"))
                 .reason(rs.getString("reason"))
                 .creator(rs.getString("creator"))
-//                .requestNumber(rs.getLong("request_number"))
                 .build();
     }
 }

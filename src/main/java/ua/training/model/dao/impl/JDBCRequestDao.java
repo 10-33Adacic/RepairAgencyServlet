@@ -76,7 +76,10 @@ public class JDBCRequestDao implements RequestDao {
     }
 
     @Override
-    public List<Request> findByCreatorAndNotStatus(String creator, String status, int page,int size) {
+    public List<Request> findByCreatorAndNotStatus(String creator,
+                                                   String status,
+                                                   int page,
+                                                   int size) {
         List<Request> resultList = new ArrayList<>();
         try (PreparedStatement ps = connection.prepareStatement
                 (bundle.getString("query.find.by.creator.and.not.status.request"))) {
@@ -94,7 +97,10 @@ public class JDBCRequestDao implements RequestDao {
         return resultList;
     }
     @Override
-    public List<Request> findByMasterAndStatus(String master, String status,int page,int size) {
+    public List<Request> findByMasterAndStatus(String master,
+                                               String status,
+                                               int page,
+                                               int size) {
         List<Request> resultList = new ArrayList<>();
         try (PreparedStatement ps = connection.prepareStatement
                 (bundle.getString("query.find.by.master.and.status.request"))) {
@@ -132,7 +138,10 @@ public class JDBCRequestDao implements RequestDao {
     }
 
     @Override
-    public void updateStatusAndPriceAndUser(Long id, String status, Long price, User user) {
+    public void updateStatusAndPriceAndUser(Long id,
+                                            String status,
+                                            Long price,
+                                            User user) {
         try (PreparedStatement ps = connection.prepareStatement(
                 bundle.getString("query.update.status.and.price.and.master"))) {
             ps.setString(1, status);
@@ -194,12 +203,9 @@ public class JDBCRequestDao implements RequestDao {
     public long findCount() {
         long count = 0;
 
-        try (PreparedStatement pstmt = connection.prepareStatement(bundle.getString("query.count.request"))) {
-
-            try (ResultSet resultSet = pstmt.executeQuery()) {
-                if (resultSet.next()) {
-                    count = resultSet.getLong(1);
-                }
+        try (PreparedStatement pstmt = connection.prepareStatement(bundle.getString("query.count.request")); ResultSet resultSet = pstmt.executeQuery()) {
+            if (resultSet.next()) {
+                count = resultSet.getLong(1);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);

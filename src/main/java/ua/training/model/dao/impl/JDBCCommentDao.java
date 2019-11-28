@@ -17,9 +17,6 @@ public class JDBCCommentDao implements CommentDao {
     private Connection connection;
     private UserDao userDao;
 
-    public JDBCCommentDao() {
-    }
-
     JDBCCommentDao(Connection connection, UserDao userDao) {
         this.connection = connection;
         this.userDao = userDao;
@@ -28,12 +25,9 @@ public class JDBCCommentDao implements CommentDao {
     public long findCount() {
         long count = 0;
 
-        try (PreparedStatement pstmt = connection.prepareStatement(bundle.getString("query.count.comment"))) {
-
-            try (ResultSet resultSet = pstmt.executeQuery()) {
-                if (resultSet.next()) {
-                    count = resultSet.getLong(1);
-                }
+        try (PreparedStatement pstmt = connection.prepareStatement(bundle.getString("query.count.comment")); ResultSet resultSet = pstmt.executeQuery()) {
+            if (resultSet.next()) {
+                count = resultSet.getLong(1);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);

@@ -35,15 +35,6 @@ public class UserService {
         return Optional.ofNullable(newUser);
     }
 
-//    public Optional<User> findUser(String email, String password){
-//        Optional<User> user = Optional.ofNullable((userDao.findByEmail(email)));
-//        if (user.isPresent() && user.get().getPassword().equals(password)) {
-//            return user;
-//        }
-//        return Optional.empty();
-//    }
-
-    //TODO: test method
     public Optional<User> findUser(String email, String password){
         try (UserDao userDao = daoFactory.createUserDao()) {
             Optional<User> user =
@@ -54,12 +45,6 @@ public class UserService {
         }
     }
 
-    //TODO: Dublicate 1
-    public Optional<User> findUserEmail(String email){
-        return Optional.ofNullable((userDao.findByEmail(email)));
-    }
-
-    //TODO: Dublicate 2
     public Optional<User> findByEmail(String email){
         return Optional.ofNullable(userDao.findByEmail(email));
     }

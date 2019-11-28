@@ -37,7 +37,10 @@ public class RequestService {
         return Optional.ofNullable(requestDao.findByCreatorAndStatus(creator,status));
     }
 
-    public Optional<List<Request>>findByCreatorAndNotStatus(String creator, String status, int page, int size){
+    public Optional<List<Request>>findByCreatorAndNotStatus(String creator,
+                                                            String status,
+                                                            int page,
+                                                            int size){
         return Optional.ofNullable(requestDao.findByCreatorAndNotStatus(creator,status,page,size));
     }
 

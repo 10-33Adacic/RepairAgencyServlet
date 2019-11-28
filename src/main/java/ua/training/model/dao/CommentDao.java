@@ -8,7 +8,6 @@ import java.sql.SQLException;
 
 public interface CommentDao extends GenericDao<Comment>{
     default Connection receiveConnection(){
-
         try {
             return ConnectionPoolHolder.getDataSource().getConnection();
         } catch (SQLException e) {
@@ -16,5 +15,4 @@ public interface CommentDao extends GenericDao<Comment>{
         }
         return null;
     }
-
 }

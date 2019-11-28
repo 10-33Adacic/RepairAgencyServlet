@@ -19,7 +19,6 @@ public class JDBCUserDao implements UserDao {
     private Connection connection;
 
     JDBCUserDao(Connection connection) {
-
         this.connection = connection;
         mapper = new UserMapper();
     }
@@ -27,8 +26,7 @@ public class JDBCUserDao implements UserDao {
     @Override
     public void add(User entity) throws SQLException {
         try (PreparedStatement ps = connection.prepareStatement(bundle.getString("query.add.user"))) {
-//                connection.setAutoCommit(false);
-
+                connection.setAutoCommit(false);
                 ps.setString(1, entity.getName());
                 ps.setString(2, entity.getEmail());
                 ps.setString(3, entity.getPassword());
@@ -36,6 +34,7 @@ public class JDBCUserDao implements UserDao {
                 ps.setBoolean(5, entity.isActive());
 
                 ps.executeUpdate();
+                connection.setAutoCommit(true);
         }
 
         catch (SQLException e) {
@@ -150,12 +149,9 @@ public class JDBCUserDao implements UserDao {
     public long findCount() {
         long count = 0;
 
-        try (PreparedStatement pstmt = connection.prepareStatement(bundle.getString("query.count"))) {
-
-            try (ResultSet resultSet = pstmt.executeQuery()) {
-                if (resultSet.next()) {
-                    count = resultSet.getLong(1);
-                }
+        try (PreparedStatement pstmt = connection.prepareStatement(bundle.getString("query.count")); ResultSet resultSet = pstmt.executeQuery()) {
+            if (resultSet.next()) {
+                count = resultSet.getLong(1);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -200,6 +196,4 @@ public class JDBCUserDao implements UserDao {
         }
         return resultList;
     }
-
-//     private static String QUERY_FIND_ALL_MASTERS = "SELECT * FROM user WHERE role = ?";
 }
