@@ -8,11 +8,11 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Error Page</title>
+    <title>Error Page 404</title>
 </head>
     <body>
         <h2>
-           Sorry, something went wrong<br/>
+           Sorry, page not found<br/>
             <%--<i>Error <%= exception %></i>--%>
         </h2>
     <br>

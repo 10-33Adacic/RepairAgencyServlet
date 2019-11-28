@@ -6,6 +6,8 @@ import ua.training.model.service.UserService;
 import javax.servlet.http.HttpServletRequest;
 import java.sql.SQLException;
 
+import static ua.training.controller.util.Constants.USER_CREATE_COMMENT;
+
 
 public class CreateComment implements Command {
 
@@ -24,9 +26,9 @@ public class CreateComment implements Command {
         String userName = (String) request.getSession().getAttribute("userName");
 
         if (commentName == null || commentName.equals("")) {
-            return "/WEB-INF/user/user-create-comment.jsp";
+            return USER_CREATE_COMMENT;
         }
-//        try {
+
         userService.findByEmail(userName).ifPresent(u -> {
             try {
                 commentService.addComment(commentName, u);
@@ -35,13 +37,6 @@ public class CreateComment implements Command {
                 e.printStackTrace();
             }
         });
-//            commentService.addComment(commentName, userService.findByEmail(userName).get());
-//
-////                request.setAttribute("sucess", true);
-//
-//        } catch (SQLException | RuntimeException e) {
-//            e.printStackTrace();
-//        }
-        return "/WEB-INF/user/user-create-comment.jsp";
+        return USER_CREATE_COMMENT;
     }
 }

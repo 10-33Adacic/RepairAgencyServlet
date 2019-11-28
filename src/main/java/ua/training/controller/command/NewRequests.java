@@ -4,6 +4,8 @@ import ua.training.model.service.RequestService;
 
 import javax.servlet.http.HttpServletRequest;
 
+import static ua.training.controller.util.Constants.MANAGER_NEW_REQUEST;
+
 public class NewRequests implements Command {
 
     private RequestService requestService;
@@ -17,9 +19,9 @@ public class NewRequests implements Command {
         try {
             requestService.findByStatus("new").ifPresent(requests -> request.setAttribute("newRequests",requests));
 
-        } catch ( java.lang.Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        return "/WEB-INF/manager/manager-new-request.jsp";
+        return MANAGER_NEW_REQUEST;
     }
 }

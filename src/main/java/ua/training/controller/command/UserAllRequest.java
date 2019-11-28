@@ -4,6 +4,8 @@ import ua.training.model.service.RequestService;
 
 import javax.servlet.http.HttpServletRequest;
 
+import static ua.training.controller.util.Constants.USER_ALL_REQUESTS;
+
 
 public class UserAllRequest implements Command {
 
@@ -32,6 +34,7 @@ public class UserAllRequest implements Command {
         } catch (NumberFormatException e) {
             size = DEFAULT_SIZE;
         }
+
         try {
             long elementsCount = requestService.findCount();
             requestService.findByCreatorAndStatus(userName,"rejected").ifPresent(requests->request.setAttribute("rejectRequests",requests));
@@ -40,9 +43,9 @@ public class UserAllRequest implements Command {
             request.setAttribute("size", size);
             request.setAttribute("pagesCount", (int) Math.ceil(elementsCount * 1.0 / size));
 
-        } catch ( java.lang.Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        return "/WEB-INF/user/user-all-request.jsp";
+        return USER_ALL_REQUESTS;
     }
 }

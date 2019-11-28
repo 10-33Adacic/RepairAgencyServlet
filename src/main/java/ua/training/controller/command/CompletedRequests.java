@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Optional;
 
+import static ua.training.controller.util.Constants.MASTER_COMPLETED_REQUEST;
+
 public class CompletedRequests implements Command {
 
     private final RequestService requestService;
@@ -34,6 +36,7 @@ public class CompletedRequests implements Command {
         } catch (NumberFormatException e) {
             size = DEFAULT_SIZE;
         }
+
         try {
             long elementsCount = requestService.findCount();
             requestService.findByMasterAndStatus(master, "completed",page,size).ifPresent(requests ->
@@ -42,10 +45,9 @@ public class CompletedRequests implements Command {
             request.setAttribute("size", size);
             request.setAttribute("pagesCount", (int) Math.ceil(elementsCount * 1.0 / size));
 
-
-        } catch ( java.lang.Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        return "/WEB-INF/master/master-completed-request.jsp";
+        return MASTER_COMPLETED_REQUEST;
     }
 }

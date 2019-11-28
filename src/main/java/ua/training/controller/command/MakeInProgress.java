@@ -6,6 +6,8 @@ import ua.training.model.service.RequestService;
 
 import javax.servlet.http.HttpServletRequest;
 
+import static ua.training.controller.util.Constants.URL_MASTER_ACCEPTED_REQUESTS;
+
 public class MakeInProgress implements Command {
 
     private RequestService requestService;
@@ -20,11 +22,11 @@ public class MakeInProgress implements Command {
         try{
             logger.info(request.getParameter("id"));
             Long id=Long.parseLong(request.getParameter("id"));
-
             requestService.updateRequest("in progress", id);
-        }catch( java.lang.Exception e) {
+        }
+        catch(Exception e) {
             e.printStackTrace();
         }
-        return "redirect:/app/master/accepted_requests";
+        return "redirect:/app/" + URL_MASTER_ACCEPTED_REQUESTS;
     }
 }

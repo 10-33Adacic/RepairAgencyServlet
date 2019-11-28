@@ -7,10 +7,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import static ua.training.controller.util.Constants.INDEX_PAGE;
+
 public class AccessFilter  implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-
     }
 
     @Override
@@ -24,15 +25,16 @@ public class AccessFilter  implements Filter {
             } else {
                 request.setAttribute("error", true);
                 request.setAttribute("message", "AccessDenied");
-                request.getRequestDispatcher("/index.jsp").forward(request, response);
+                request.getRequestDispatcher(INDEX_PAGE).forward(request, response);
             }
-        }else if (path.contains("manager")) {
+        }else
+            if (path.contains("manager")) {
             if (request.getSession().getAttribute("role").equals(Role.MANAGER)){
                 filterChain.doFilter(servletRequest, servletResponse);
             } else {
                 request.setAttribute("error", true);
                 request.setAttribute("message", "AccessDenied");
-                request.getRequestDispatcher("/index.jsp").forward(request, response);
+                request.getRequestDispatcher(INDEX_PAGE).forward(request, response);
             }
         } else {
             filterChain.doFilter(servletRequest, servletResponse);

@@ -7,7 +7,6 @@ import java.util.HashSet;
 public class SessionListener implements HttpSessionListener {
     @Override
     public void sessionCreated(HttpSessionEvent httpSessionEvent) {
-
     }
 
     @Override
@@ -24,6 +23,5 @@ public class SessionListener implements HttpSessionListener {
         httpSessionEvent.getSession().setAttribute("loggedUsers", loggedUsers);
         System.out.println("listener works");
         System.out.println(loggedUsers);
-
     }
 }

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
 
 import static java.util.Objects.nonNull;
+import static ua.training.controller.util.Constants.*;
 
 public class Login implements Command {
 
@@ -24,16 +25,23 @@ public class Login implements Command {
     public String execute(HttpServletRequest request) {
         String email = request.getParameter("email");
         String password = request.getParameter("pass");
-        if (email == null) return "/login.jsp";
+
+        if (email == null)
+            return LOGIN_PAGE;
+
         logger.info("user enter email: " + email + " " + password);
 
-        if (nonNull(request.getSession().getAttribute("userEmail"))) return "/welcome.jsp";
+        if (nonNull(request.getSession().getAttribute("userEmail")))
+            return "/welcome.jsp";
+
         Optional<User> user = userService.findUser(email, password);
+
         if (!user.isPresent()) {
             logger.info("Invalid attempt of user email: '" + email + "'");
             request.setAttribute("error", true);
-            return "/login.jsp";
+            return LOGIN_PAGE;
         }
+
         if (CommandUtility.checkUserIsLogged(request, email)) {
             request.setAttribute("error", true);
             logger.info("User email " + email + " already logged.");
@@ -45,15 +53,15 @@ public class Login implements Command {
 
         if (user.get().getRole().equals(Role.MASTER)) {
             CommandUtility.setUserRole(request, Role.MASTER, email);
-            return "redirect:/app/master/accepted_requests";
+            return "redirect:/app/" + URL_MASTER_ACCEPTED_REQUESTS;
         } else if (user.get().getRole().equals(Role.USER)) {
             CommandUtility.setUserRole(request, Role.USER, email);
-            return "redirect:/app/user/create_request";
+            return "redirect:/app/" + URL_USER_CREATE_REQUEST;
         } else if (user.get().getRole().equals(Role.MANAGER)) {
             CommandUtility.setUserRole(request, Role.MANAGER, email);
-            return "redirect:/app/manager/new_requests";
+            return "redirect:/app/" + URL_MANAGER_NEW_REQUESTS;
         } else {
-            return "redirect:/index.jsp";
+            return "redirect:" + INDEX_PAGE;
         }
     }
 }

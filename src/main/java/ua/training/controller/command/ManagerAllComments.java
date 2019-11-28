@@ -3,6 +3,8 @@ package ua.training.controller.command;
 import ua.training.model.service.CommentService;
 import javax.servlet.http.HttpServletRequest;
 
+import static ua.training.controller.util.Constants.MANAGER_ALL_COMMENT;
+
 public class ManagerAllComments implements Command {
 
     private CommentService commentService;
@@ -28,15 +30,16 @@ public class ManagerAllComments implements Command {
         } catch (NumberFormatException e) {
             size = DEFAULT_SIZE;
         }
+
         try {
             long elementsCount = commentService.findCount();
             commentService.findAllComment(page, size).ifPresent(com->request.setAttribute("comments",com));
             request.setAttribute("page", page);
             request.setAttribute("size", size);
             request.setAttribute("pagesCount", (int) Math.ceil(elementsCount * 1.0 / size));
-        } catch ( java.lang.Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        return "/WEB-INF/manager/manager-all-comment.jsp";
+        return MANAGER_ALL_COMMENT;
     }
 }

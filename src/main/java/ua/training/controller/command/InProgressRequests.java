@@ -4,6 +4,8 @@ import ua.training.model.service.RequestService;
 
 import javax.servlet.http.HttpServletRequest;
 
+import static ua.training.controller.util.Constants.MASTER_IN_PROGRESS_REQUEST;
+
 public class InProgressRequests implements Command{
 
     private RequestService requestService;
@@ -28,7 +30,6 @@ public class InProgressRequests implements Command{
         }
 
         try {
-
             size = Integer.parseInt(request.getParameter("size"));
         } catch (NumberFormatException e) {
             size = DEFAULT_SIZE;
@@ -40,12 +41,11 @@ public class InProgressRequests implements Command{
                     request.setAttribute("inProgressRequests", requests));
             request.setAttribute("page", page);
             request.setAttribute("size", size);
-            request.setAttribute("pagesCount", (int) Math.ceil(elementsCount * 1.0 / size));
-
-
-        } catch ( java.lang.Exception e) {
+            request.setAttribute("pagesCount",
+                    (int) Math.ceil(elementsCount * 1.0 / size));
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        return "/WEB-INF/master/master-in-progress-request.jsp";
+        return MASTER_IN_PROGRESS_REQUEST;
     }
 }

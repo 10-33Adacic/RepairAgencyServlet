@@ -4,6 +4,8 @@ import ua.training.model.service.RequestService;
 import ua.training.model.service.UserService;
 import javax.servlet.http.HttpServletRequest;
 
+import static ua.training.controller.util.Constants.URL_MANAGER_NEW_REQUESTS;
+
 
 public class MakeRequestAcceptedDone implements Command {
 
@@ -20,14 +22,14 @@ public class MakeRequestAcceptedDone implements Command {
 
         try{
             Long id=Long.parseLong(request.getParameter("id"));
-
             String mastermail=request.getParameter("email");
             Long price=Long.parseLong(request.getParameter("price"));
 
             requestService.updateStatusAndPriceAndUser(id,"accepted",price,userService.findByEmail(mastermail).get());
-        }catch( java.lang.Exception e) {
+        }
+        catch(Exception e) {
             e.printStackTrace();
         }
-        return "redirect:/app/manager/new_requests";
+        return "redirect:/app/" + URL_MANAGER_NEW_REQUESTS;
     }
 }

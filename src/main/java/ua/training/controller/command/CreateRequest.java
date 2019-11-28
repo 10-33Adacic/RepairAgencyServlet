@@ -5,6 +5,8 @@ import ua.training.model.service.RequestService;
 import javax.servlet.http.HttpServletRequest;
 import java.sql.SQLException;
 
+import static ua.training.controller.util.Constants.USER_CREATE_REQUEST;
+
 public class CreateRequest implements Command{
 
     private RequestService requestService;
@@ -21,7 +23,7 @@ public class CreateRequest implements Command{
         request.setAttribute("lang", request.getParameter("lang"));
 
         if (requestName == null || requestName.equals("")) {
-            return "/WEB-INF/user/user-create-request.jsp";
+            return USER_CREATE_REQUEST;
         }
         try {
            if(requestService.addRequest(requestName, userName)!=null)
@@ -30,6 +32,6 @@ public class CreateRequest implements Command{
         } catch (SQLException | RuntimeException e) {
             e.printStackTrace();
         }
-        return "/WEB-INF/user/user-create-request.jsp";
+        return USER_CREATE_REQUEST;
     }
 }

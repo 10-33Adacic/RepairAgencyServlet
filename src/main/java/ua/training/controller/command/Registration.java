@@ -9,6 +9,8 @@ import ua.training.model.service.UserService;
 import javax.servlet.http.HttpServletRequest;
 import java.sql.SQLException;
 
+import static ua.training.controller.util.Constants.WELCOME_PAGE;
+
 public class Registration implements Command {
 
     private UserService userService;
@@ -30,16 +32,21 @@ public class Registration implements Command {
                 + "password: " + password + "   "
                 + "role: " + role);
 
-        if (name == null || name.equals("") || password == null || password.equals("") || email == null || email.equals("")) {
+        if (name == null
+                || name.equals("")
+                || password == null
+                || password.equals("")
+                || email == null
+                || email.equals("")) {
             return "/registration.jsp";
         }
+
         try {
             if (userService.findUserEmail(email).isPresent()) {
                 request.setAttribute("error", true);
                 return "/registration.jsp";
-//                throw new RuntimeException("User with this email already exist");
-
             }
+
             String userRole = "";
             if (role.equals("USER"))
                 userRole = Role.USER.name();
@@ -55,10 +62,9 @@ public class Registration implements Command {
                     .role(Role.valueOf(userRole))
                     .build());
 
-
         } catch (SQLException | RuntimeException e) {
             e.printStackTrace();
         }
-        return "/welcome.jsp";
+        return WELCOME_PAGE;
     }
 }

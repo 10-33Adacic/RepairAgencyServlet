@@ -6,6 +6,8 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Optional;
 
+import static ua.training.controller.util.Constants.MASTER_ACCEPTED_REQUEST;
+
 public class AcceptedRequests implements Command {
     private RequestService requestService;
     private static final int DEFAULT_PAGE = 1;
@@ -32,6 +34,7 @@ public class AcceptedRequests implements Command {
         } catch (NumberFormatException e) {
             size = DEFAULT_SIZE;
         }
+
         try {
             long elementsCount = requestService.findCount();
             Optional<List<ua.training.model.entity.Request>> list = requestService.findByMasterAndStatus
@@ -42,9 +45,9 @@ public class AcceptedRequests implements Command {
             request.setAttribute("size", size);
             request.setAttribute("pagesCount", (int) Math.ceil(elementsCount * 1.0 / size));
 
-        } catch (java.lang.Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        return "/WEB-INF/master/master-accepted-request.jsp";
+        return MASTER_ACCEPTED_REQUEST;
     }
 }
