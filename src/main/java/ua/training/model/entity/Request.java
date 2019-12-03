@@ -1,6 +1,8 @@
 package ua.training.model.entity;
 
 
+import java.util.Objects;
+
 public class Request {
 
     private Long id;
@@ -115,4 +117,19 @@ public class Request {
             return Request.this;
         }
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Request request = (Request) o;
+        return Objects.equals(id, request.id);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(id);
+    }
+
 }
