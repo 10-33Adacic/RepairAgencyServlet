@@ -180,10 +180,10 @@ public class JDBCRequestDao implements RequestDao {
     }
 
     @Override
-    public void delete(int id) {
+    public void delete(long id) {
         try (PreparedStatement ps = connection.prepareStatement(
                 bundle.getString("query.delete.by.id.request"))) {
-            ps.setInt(1, id);
+            ps.setLong(1, id);
             ps.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);

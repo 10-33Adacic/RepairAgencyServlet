@@ -76,7 +76,7 @@ public class JDBCCommentDao implements CommentDao {
     }
 
     @Override
-    public void delete(int id) {
+    public void delete(long id) {
 
     }
 
