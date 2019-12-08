@@ -44,28 +44,24 @@ public class JDBCUserDaoTest {
     }
 
     @Test
-    public void addUser() {
-        try {
-            final String u = "testUser1@email.com";
-            final String p = "";
-            final String n = "testUserName1";
-            final User user = User.builder()
-                    .email(u)
-                    .password(p)
-                    .role(Role.USER)
-                    .active(true)
-                    .name(n)
-                    .build();
+    public void addUser() throws SQLException{
+        final String u = "testUser1@email.com";
+        final String p = "";
+        final String n = "testUserName1";
+        final User user = User.builder()
+                .email(u)
+                .password(p)
+                .role(Role.USER)
+                .active(true)
+                .name(n)
+                .build();
 
-            userDao.add(user);
+        userDao.add(user);
 
-            User expected = userDao.findByEmailAndPassword(u, p);
+        User expected = userDao.findByEmailAndPassword(u, p);
 
-            userDao.delete(expected.getId());
+        userDao.delete(expected.getId());
 
-            Assert.assertNotNull(expected);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        Assert.assertNotNull(expected);
     }
 }
