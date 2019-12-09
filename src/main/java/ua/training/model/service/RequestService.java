@@ -56,8 +56,8 @@ public class RequestService {
         return Optional.ofNullable(requestDao.findByMasterAndStatus(master, status, page,size));
     }
 
-    public Optional<List<Request>> findByStatus(String status){
-        return Optional.ofNullable(requestDao.findByStatus(status));
+    public Optional<List<Request>> findByStatus(String status, int page, int size){
+        return Optional.ofNullable(requestDao.findByStatus(status, page, size));
     }
 
     public void updateStatusAndPriceAndUser(Long id,String status,Long price, User user){

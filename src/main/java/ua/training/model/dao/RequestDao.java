@@ -13,7 +13,7 @@ public interface RequestDao extends GenericDao<Request>{
 
     List<Request> findByMasterAndStatus(String master, String status,int page,int size);
 
-    List<Request> findByStatus( String status);
+    List<Request> findByStatus( String status, int page,int size);
 
     void updateStatusAndPriceAndUser(Long id, String status, Long price, User user);
 

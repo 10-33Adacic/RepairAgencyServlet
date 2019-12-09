@@ -11,7 +11,7 @@ import static ua.training.controller.util.Constants.MASTER_ACCEPTED_REQUEST;
 public class AcceptedRequests implements Command {
     private RequestService requestService;
     private static final int DEFAULT_PAGE = 1;
-    private static final int DEFAULT_SIZE = 10;
+    private static final int DEFAULT_SIZE = 6;
 
     public AcceptedRequests(RequestService requestService) {
         this.requestService = requestService;

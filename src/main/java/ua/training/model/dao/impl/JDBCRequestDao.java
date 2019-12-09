@@ -121,11 +121,13 @@ public class JDBCRequestDao implements RequestDao {
     }
 
     @Override
-    public List<Request> findByStatus(String status) {
+    public List<Request> findByStatus(String status, int page, int size) {
         List<Request> resultList = new ArrayList<>();
         try (PreparedStatement ps = connection.prepareStatement
                 (bundle.getString("query.find.by.status.request"))) {
             ps.setString(1, status);
+            ps.setInt(2, (page - 1) * size);
+            ps.setInt(3, size);
 
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {

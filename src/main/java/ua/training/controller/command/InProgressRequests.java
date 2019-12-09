@@ -10,7 +10,7 @@ public class InProgressRequests implements Command{
 
     private RequestService requestService;
     private static final int DEFAULT_PAGE = 1;
-    private static final int DEFAULT_SIZE = 10;
+    private static final int DEFAULT_SIZE = 6;
 
     public InProgressRequests(RequestService requestService) {
         this.requestService = requestService;

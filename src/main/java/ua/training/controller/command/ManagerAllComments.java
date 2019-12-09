@@ -9,7 +9,7 @@ public class ManagerAllComments implements Command {
 
     private CommentService commentService;
     private static final int DEFAULT_PAGE = 1;
-    private static final int DEFAULT_SIZE = 10;
+    private static final int DEFAULT_SIZE = 6;
 
     public ManagerAllComments(CommentService commentService) {
         this.commentService = commentService;
