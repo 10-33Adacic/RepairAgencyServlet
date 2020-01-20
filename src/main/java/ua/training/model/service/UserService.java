@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
+//TODO попробовать имплементить интерфейс
 public class UserService {
     private DaoFactory daoFactory ;
     private UserDao userDao ;
@@ -32,6 +33,7 @@ public class UserService {
                 .active(true)
                 .build();
         userDao.add(newUser);
+        //TODO null double check
         return Optional.ofNullable(newUser);
     }
 

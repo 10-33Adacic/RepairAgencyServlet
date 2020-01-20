@@ -72,17 +72,14 @@ public class JDBCCommentDao implements CommentDao {
 
     @Override
     public void update(Comment entity) {
-
     }
 
     @Override
     public void delete(long id) {
-
     }
 
     @Override
     public void close() {
-
     }
 
     private Comment extractFromResultSet(ResultSet rs)

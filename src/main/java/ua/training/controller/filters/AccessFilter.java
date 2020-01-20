@@ -19,10 +19,12 @@ public class AccessFilter  implements Filter {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         String path = request.getRequestURI();
+        //TODO refactor
         if (path.contains("master")) {
             if (request.getSession().getAttribute("role").equals(Role.MASTER)) {
                 filterChain.doFilter(servletRequest, servletResponse);
             } else {
+                //TODO refactor
                 request.setAttribute("error", true);
                 request.setAttribute("message", "AccessDenied");
                 request.getRequestDispatcher(INDEX_PAGE).forward(request, response);
@@ -32,6 +34,7 @@ public class AccessFilter  implements Filter {
             if (request.getSession().getAttribute("role").equals(Role.MANAGER)){
                 filterChain.doFilter(servletRequest, servletResponse);
             } else {
+                //TODO refactor
                 request.setAttribute("error", true);
                 request.setAttribute("message", "AccessDenied");
                 request.getRequestDispatcher(INDEX_PAGE).forward(request, response);
